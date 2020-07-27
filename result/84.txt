@@ -1,0 +1,3 @@
+running problem 84
+84 Solved? True Time: 0.13s
+invariant: (or (< (+ 0.0 (* x 1.0) (* 1 0.0)) 0.0) (> (+ 0.0 (* y 1.0) (* 1 0.0)) 0.0))

@@ -1,0 +1,8 @@
+running problem 1
+1 Solved? True Time: 12.36s
+invariant: (and (= (+ 2.0 (* 1.0 (* y y)) (* (- 1.0) y) (* (- 2.0) x)) 0.0)
+     (>= (* y y) 0.0)
+     (>= (* x x) 1.0)
+     (>= (* x y) 0.0)
+     (>= y 0.0)
+     (>= x 1.0))

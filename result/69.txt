@@ -1,0 +1,4 @@
+running problem 69
+69 Solved? True Time: 1.02s
+invariant: (or (= (+ 0.0 (* x 1.0) (* 1 (- 1.0))) 0.0)
+    (>= (+ 0.0 (* y 1.0) (* 1 0.0)) 0.0))

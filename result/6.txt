@@ -1,0 +1,4 @@
+running problem 6
+6 Solved? True Time: 1.03s
+invariant: (or (= (+ 0.0 (* x 1.0) (* 1 0.0)) 0.0)
+    (>= (+ 0.0 (* z 1.0) (* y (- 1.0))) 0.0))

@@ -1,0 +1,4 @@
+running problem 106
+106 theoretically unsolvable
+106 Solved? False Time: 0.00s
+invariant: 

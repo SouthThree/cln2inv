@@ -1,0 +1,4 @@
+running problem 61
+61 theoretically unsolvable
+61 Solved? False Time: 0.00s
+invariant: 

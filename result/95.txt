@@ -1,0 +1,4 @@
+running problem 95
+95 Solved? True Time: 0.71s
+invariant: (and (= (+ 0.0 (* y 1.0) (* 1 (- 1.0))) 0.0)
+     (= (+ 0.0 (* i 1.0) (* j (- 1.0))) 0.0))

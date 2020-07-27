@@ -1,0 +1,3 @@
+running problem 20
+20 Solved? True Time: 10.79s
+invariant: (and (>= x 0.0) (>= m 0.0))

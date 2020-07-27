@@ -1,0 +1,4 @@
+running problem 46
+46 Solved? True Time: 0.32s
+invariant: (and (> (+ 0.0 (* n 1.0) (* 1 0.0)) 0.0)
+     (<= (+ 0.0 (* c 1.0) (* n (- 1.0))) 0.0))

@@ -1,0 +1,7 @@
+running problem 24
+24 Solved? True Time: 1.81s
+invariant: (and (= (+ (* i 1.0) (* 2.0 j) (- 21.0)) 0.0)
+     (>= i 1.0)
+     (>= j 6.0)
+     (<= i 9.0)
+     (<= j 10.0))

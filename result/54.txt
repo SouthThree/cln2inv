@@ -1,0 +1,4 @@
+running problem 54
+54 Solved? True Time: 0.15s
+invariant: (and (= (+ 0.0 (* c 1.0) (* 1 0.0)) 0.0)
+     (> (+ 0.0 (* n 1.0) (* 1 0.0)) 0.0))

@@ -1,0 +1,3 @@
+running problem 128
+128 Solved? True Time: 0.13s
+invariant: (>= (+ 0.0 (* x 1.0) (* 1 (- 1.0))) 0.0)
