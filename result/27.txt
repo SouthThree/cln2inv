@@ -1,4 +1,0 @@
-running problem 27
-27 theoretically unsolvable
-27 Solved? False Time: 0.00s
-invariant: 

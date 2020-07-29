@@ -1,3 +1,0 @@
-running problem 18
-18 Solved? True Time: 6.31s
-invariant: (and (>= x 1.0) (>= m 1.0))

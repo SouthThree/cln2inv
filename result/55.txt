@@ -1,3 +1,0 @@
-running problem 55
-55 Solved? True Time: 0.08s
-invariant: (> (+ 0.0 (* n 1.0) (* 1 0.0)) 0.0)

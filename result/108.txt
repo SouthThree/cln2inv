@@ -1,3 +1,0 @@
-running problem 108
-108 Solved? True Time: 0.05s
-invariant: (<= (+ 0.0 (* a 1.0) (* m (- 1.0))) 0.0)

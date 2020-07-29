@@ -1,3 +1,0 @@
-running problem 53
-53 Solved? True Time: 0.10s
-invariant: (>= (+ 0.0 (* c 1.0) (* 1 0.0)) 0.0)

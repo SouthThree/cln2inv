@@ -1,3 +1,0 @@
-running problem 78
-78 Solved? True Time: 0.13s
-invariant: (<= (+ 0.0 (* 1 0.0) (* i (- 1.0))) 0.0)

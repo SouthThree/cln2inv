@@ -1,4 +1,0 @@
-running problem 109
-109 Solved? True Time: 1.58s
-invariant: (or (= (+ 0.0 (* k 1.0) (* 1 0.0)) 0.0)
-    (<= (+ 0.0 (* a 1.0) (* m (- 1.0))) 0.0))

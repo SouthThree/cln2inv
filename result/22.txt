@@ -1,3 +1,0 @@
-running problem 22
-22 Solved? True Time: 6.33s
-invariant: (and (>= x 1.0) (>= m 1.0))

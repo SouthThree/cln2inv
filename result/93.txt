@@ -1,8 +1,0 @@
-running problem 93
-93 Solved? True Time: 4.81s
-invariant: (and (= (+ (* x 1.0) (* 1.0 y) (* (- 3.0) i)) 0.0)
-     (>= x 0.0)
-     (>= y 0.0)
-     (>= n 0.0)
-     (>= i 0.0)
-     (< (+ (* n (- 1.0)) (* i 1.0)) 1.0))

@@ -1,4 +1,0 @@
-running problem 103
-103 Solved? True Time: 0.15s
-invariant: (or (< (+ 0.0 (* x 1.0) (* 1 (- 100.0))) 0.0)
-    (= (+ 0.0 (* x 1.0) (* 1 (- 100.0))) 0.0))

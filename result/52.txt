@@ -1,3 +1,0 @@
-running problem 52
-52 Solved? True Time: 0.11s
-invariant: (not (< (+ 0.0 (* c 1.0) (* 1 0.0)) 0.0))

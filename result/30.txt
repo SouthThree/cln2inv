@@ -1,3 +1,0 @@
-running problem 30
-30 Solved? True Time: 0.15s
-invariant: (or (> (+ 0.0 (* x 1.0) (* 1 0.0)) 0.0) (= (+ 0.0 (* x 1.0) (* 1 0.0)) 0.0))

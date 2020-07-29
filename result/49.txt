@@ -1,3 +1,0 @@
-running problem 49
-49 Solved? True Time: 0.09s
-invariant: (> (+ 0.0 (* n 1.0) (* 1 0.0)) 0.0)

@@ -1,4 +1,0 @@
-running problem 72
-72 theoretically unsolvable
-72 Solved? False Time: 0.00s
-invariant: 

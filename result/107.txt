@@ -1,4 +1,0 @@
-running problem 107
-107 Solved? True Time: 0.17s
-invariant: (or (< (+ 0.0 (* k 1.0) (* 1 (- 1.0))) 0.0)
-    (<= (+ 0.0 (* a 1.0) (* m (- 1.0))) 0.0))

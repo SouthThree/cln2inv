@@ -1,3 +1,0 @@
-running problem 97
-97 Solved? True Time: 0.09s
-invariant: (= (+ 0.0 (* y 1.0) (* 1 (- 2.0))) 0.0)

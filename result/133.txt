@@ -1,4 +1,0 @@
-running problem 133
-133 Solved? True Time: 0.13s
-invariant: (or (< (+ 0.0 (* x 1.0) (* n (- 1.0))) 0.0)
-    (= (+ 0.0 (* x 1.0) (* n (- 1.0))) 0.0))

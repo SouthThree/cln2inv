@@ -1,6 +1,0 @@
-running problem 28
-28 Solved? True Time: 1.56s
-invariant: (let ((a!1 (not (= (+ 0.0 (* x 1.0) (* 1 0.0)) 0.0))))
-  (or (not a!1)
-      (> (+ 0.0 (* x 1.0) (* 1 0.0)) 0.0)
-      (< (+ 0.0 (* n 1.0) (* 1 0.0)) 0.0)))

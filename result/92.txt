@@ -1,4 +1,0 @@
-running problem 92
-92 Solved? True Time: 0.23s
-invariant: (and (= (+ 0.0 (* x 1.0) (* 1 0.0)) 0.0)
-     (= (+ 0.0 (* y 1.0) (* 1 0.0)) 0.0))

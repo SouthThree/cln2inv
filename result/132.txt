@@ -1,3 +1,0 @@
-running problem 132
-132 Solved? True Time: 0.08s
-invariant: (>= (+ 0.0 (* i 1.0) (* 1 0.0)) 0.0)

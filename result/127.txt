@@ -1,3 +1,0 @@
-running problem 127
-127 Solved? True Time: 2.92s
-invariant: (and (= (+ 0.0 (* (- 1.0) i) (* 1.0 j) (* 1.0 x) (* (- 1.0) y)) 0.0))

@@ -1,4 +1,0 @@
-running problem 114
-114 Solved? True Time: 0.10s
-invariant: (let ((a!1 (not (= (+ 0.0 (* sn 1.0) (* x (- 1.0))) 0.0))))
-  (not a!1))

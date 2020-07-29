@@ -1,5 +1,0 @@
-running problem 21
-21 Solved? True Time: 1.63s
-invariant: (let ((a!1 (= (+ (+ 0.0 (* m 1.0)) (* 1 (- 1.0))) 0.0))
-      (a!2 (< (+ (+ 0.0 (* m 1.0)) (* n (- 1.0))) 0.0)))
-  (or a!1 a!2))
