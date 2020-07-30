@@ -2,6 +2,7 @@ import re
 from subprocess import run
 import json
 
+# parse conditions in c files
 
 OPERATORS = set(['+', '-', '*', '/', '(', ')', '@', '<', '#', '>', '!', '='])
 PRIORITY = {'+':1, '-':1, '*':2, '/':2}

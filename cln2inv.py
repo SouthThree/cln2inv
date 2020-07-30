@@ -16,13 +16,12 @@ def load_consts(problem_num, const_file):
             if int(number) == problem_num:
                 consts = consts_expand.split(',')
                 consts = [int(const) for const in consts]
-                
+
     return consts
 
 
-
-
 def run_code2inv_problem(problem_num):
+    # benchmark位置
     fname = str(problem_num) + '.c'
     csvname = str(problem_num) + '.csv'
     src_path = 'benchmarks/code2inv/c/'
@@ -30,15 +29,19 @@ def run_code2inv_problem(problem_num):
     trace_path = 'benchmarks/code2inv/csv/'
 
     if problem_num in [26, 27, 31, 32, 61, 62, 72, 75, 106]:
-        print(problem_num,'theoretically unsolvable')
+        print(problem_num, 'theoretically unsolvable')
         return False, '', 0
 
     start_time = time.time()
     consts = load_consts(problem_num, 'benchmarks/code2inv/smt2/const.txt')
-    
 
-    templateGen = TemplateGen(src_path+fname, trace_path + csvname)
+    # 生成不变量模板
+    templateGen = TemplateGen(src_path + fname, trace_path + csvname)
+
+    # 生成不变量
     trainer = CLNTrainer(trace_path + csvname)
+
+    # 检查是否为不变量
     invariantChecker = InvariantChecker(fname, check_path)
 
     non_loop_invariant = None
@@ -58,8 +61,8 @@ def run_code2inv_problem(problem_num):
         restarts = 0
         while not solved and rerun and restarts < 10:
             invariant, rerun = trainer.build_train_cln(cln_template, consts,
-                    max_epoch=max_epoch, non_loop_invariant=non_loop_invariant,
-                    pname=problem_num)
+                                                       max_epoch=max_epoch, non_loop_invariant=non_loop_invariant,
+                                                       pname=problem_num)
 
             try:
                 solved, inv_str = invariantChecker.check_cln(invariant)
@@ -75,11 +78,14 @@ def run_code2inv_problem(problem_num):
     runtime = time.time() - start_time
     return solved, inv_str, runtime
 
-    
+
 def main():
     if len(sys.argv) > 1:
         print('running problem', sys.argv[1])
+        # 第problem个问题
         problem = int(sys.argv[1])
+
+        # 求解
         solved, inv_str, runtime = run_code2inv_problem(problem)
         print(problem, 'Solved?', solved, 'Time: {:0.2f}s'.format(runtime))
         print('invariant:', inv_str)
@@ -97,7 +103,7 @@ def main():
             if i in [26, 27, 31, 32, 61, 62, 72, 75, 106]:
                 unsolvable += 1
             else:
-                assert(solved)
+                assert (solved)
             runtimes.append(runtime)
 
             print(i, 'Solved?', solved, 'Total Solved: {}/{}'.format(total, 124), 'Time: {:0.2f}s'.format(runtime))
@@ -105,5 +111,5 @@ def main():
         print('Avg. Runtime: {:0.1f}s, Max Runtime: {:0.1f}s'.format(np.mean(runtimes), np.max(runtimes)))
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     main()

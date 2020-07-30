@@ -229,6 +229,7 @@ class CLNTrainer():
         self.data_n = data_n
         var_names = list(df_data.columns)
 
+        # 构建cln模型
         cln_model, weights, bs, Bs, epss = build_cln(template, var_names)
 
         ges, les, eqs = infer_single_var_bounds_consts(df_data, consts)

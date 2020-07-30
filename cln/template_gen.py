@@ -6,8 +6,6 @@ import re, operator
 import z3
 
 
-
-
 class TemplateOp():
     def __init__(self):
         self.params = []
@@ -16,31 +14,31 @@ class TemplateOp():
 class Or(TemplateOp):
     def __init__(self):
         self.params = []
-        
+
     def __str__(self, depth=0):
-        s = str('    '*depth) + 'Or' + '\n'
+        s = str('    ' * depth) + 'Or' + '\n'
         for p in self.params:
-            s += p.__str__(depth=depth+1)
+            s += p.__str__(depth=depth + 1)
         return s
-    
+
     def to_z3(self):
         param_z3s = [p.to_z3() for p in self.params]
         return z3.Or(param_z3s)
 
     def is_static(self):
         return np.all([p.is_static() for p in self.params])
-        
-        
+
+
 class And(TemplateOp):
     def __init__(self):
         self.params = []
-        
+
     def __str__(self, depth=0):
-        s = str('    '*depth) + 'Or' + '\n'
+        s = str('    ' * depth) + 'Or' + '\n'
         for p in self.params:
-            s += p.__str__(depth=depth+1)
+            s += p.__str__(depth=depth + 1)
         return s
-    
+
     def to_z3(self):
         param_z3s = [p.to_z3() for p in self.params]
         return z3.And(param_z3s)
@@ -48,79 +46,77 @@ class And(TemplateOp):
     def is_static(self):
         return np.all([p.is_static() for p in self.params])
 
-    
+
 class Not(TemplateOp):
     def __init__(self):
         self.params = []
-        
+
     def __str__(self, depth=0):
-        s = str('    '*depth) + 'Not' + '\n'
+        s = str('    ' * depth) + 'Not' + '\n'
         for p in self.params:
-            s += p.__str__(depth=depth+1)
+            s += p.__str__(depth=depth + 1)
         return s
-    
+
     def to_z3(self):
-        assert(len(self.params) == 1)
+        assert (len(self.params) == 1)
         return z3.Not(self.params[0].to_z3())
 
     def is_static(self):
         return np.all([p.is_static() for p in self.params])
 
-        
+
 class Constraint(TemplateOp):
     OPS = {
-            '=': operator.eq,
-            '>': operator.gt,
-            '<': operator.lt,
-            '>=': operator.ge,
-            '<=': operator.le,
-          }
-    
+        '=': operator.eq,
+        '>': operator.gt,
+        '<': operator.lt,
+        '>=': operator.ge,
+        '<=': operator.le,
+    }
+
     def __init__(self, op):
         self.params = []
         self.coeffs = {}
         self.static = True
         self.op = op
-        
+
     def __str__(self, depth=0):
-        s = str('    '*depth) + self.op + '\n'
+        s = str('    ' * depth) + self.op + '\n'
         for p in self.params:
             if isinstance(p, TemplateOp):
-                s += p.__str__(depth=depth+1)
+                s += p.__str__(depth=depth + 1)
             else:
-                s += str('    '*(depth+1)) + str(p) + '\n'
+                s += str('    ' * (depth + 1)) + str(p) + '\n'
         return s
-    
+
     def to_z3(self):
         expr = 0
         for var, coeff in self.coeffs.items():
-            expr += z3.Real(var)*coeff
+            expr += z3.Real(var) * coeff
         op_func = Constraint.OPS[self.op]
         return op_func(expr, 0)
 
     def is_static(self):
         return self.static
 
-            
-        
+
 class NumOp(TemplateOp):
     def __init__(self, op):
         self.params = []
         self.op = op
-        
+
     def __str__(self, depth=0):
-        s = str('    '*depth) + self.op + '\n'
+        s = str('    ' * depth) + self.op + '\n'
         for p in self.params:
             if isinstance(p, TemplateOp):
-                s += p.__str__(depth=depth+1)
+                s += p.__str__(depth=depth + 1)
             else:
-                s += str('    '*(depth+1)) + str(p) + '\n'
+                s += str('    ' * (depth + 1)) + str(p) + '\n'
         return s
-    
+
     def to_z3(self):
         raise NotImplementedError('NumOp does not support z3 conversion')
-    
-    
+
 
 def get_op(smt):
     smt = smt.lstrip()
@@ -148,17 +144,17 @@ def get_op(smt):
         return NumOp('-'), smt[1:]
     elif smt.startswith('*'):
         return NumOp('*'), smt[1:]
-    raise ValueError("Invalid op "+smt[:2])
+    raise ValueError("Invalid op " + smt[:2])
 
 
 def get_coeffs(smt, coeffs={}, factor=1):
     if isinstance(smt, int):
-        coeffs['1'] += factor*smt
+        coeffs['1'] += factor * smt
     elif isinstance(smt, str):
         coeffs[smt] += factor
 
     elif not isinstance(smt, NumOp):
-        raise ValueError("Unexpected term in get_coeffs "+str(smt))
+        raise ValueError("Unexpected term in get_coeffs " + str(smt))
 
     elif smt.op == '*':
         for p in smt.params:
@@ -175,7 +171,7 @@ def get_coeffs(smt, coeffs={}, factor=1):
         get_coeffs(smt.params[0], coeffs, factor)
         get_coeffs(smt.params[1], coeffs, -factor)
     else:
-        raise ValueError("Unexpected op in get_coeffs "+str(smt))
+        raise ValueError("Unexpected op in get_coeffs " + str(smt))
 
 
 def flatten_constraint(constr):
@@ -218,54 +214,63 @@ def build_simple_template(smt):
                 cur_op.params.append(word)
     return root_op
 
+
 class TemplateGen():
-    
+
     def __init__(self, c_file, csv_name):
-        
+
         self.c_file = c_file
         self.csv_name = csv_name
-        
+
         # parse conditions
+        # condition包括前置条件、后置条件以及谓词
         self.condition = parse_file_conditions(self.c_file)
         condition = self.condition
-        
+
         # generate simple templates
         collection = []
         collection = collection + (condition['preconds'])
         collection.append(condition['predicate'])
         collection.append(condition['postcondition']['assert'])
         collection = collection + (condition['postcondition']['ifs'])
+
+        # collection 包括单个的语句（前置条件、后置条件、谓词）
+
         if condition['predicate']:
-            collection.append( "(or " + condition['predicate'] + " " + condition['postcondition']['assert'] + ")")
+            collection.append("(or " + condition['predicate'] + " " + condition['postcondition']['assert'] + ")")
+        print(collection)
         collection = [i for i in collection if i is not None]
-        ands = [ "(and " + i + " " + j + " )" for i in collection for j in collection]
-        ors = [ "(or " + i + " " + j + " )" for i in collection for j in collection]
+
+        # collection中的每个语句做合取和析取之后加入到collection
+        ands = ["(and " + i + " " + j + " )" for i in collection for j in collection]
+        ors = ["(or " + i + " " + j + " )" for i in collection for j in collection]
         collection = collection + ands + ors
-        
+        print("In TemplateGen():before return ")
+        print(collection)
+
         self.simple_template_smts = collection
         self.simple_index = 0
         self.generic_index = 0
 
-
     def build_generic_template(self, generic_index, pred_str):
         df = load_trace(self.csv_name)
-        
+
         var_names = list(df.columns)
         template = And()
         if generic_index < 1:
             eq = Constraint('=')
-            eq.coeffs = {var:0 for var in var_names}
+            eq.coeffs = {var: 0 for var in var_names}
             eq.static = False
             template.params.append(eq)
         else:
-            if generic_index%2:
+            if generic_index % 2:
                 eq_relation = And()
             else:
                 eq_relation = Or()
-            n_eqs = (generic_index+3)//2
+            n_eqs = (generic_index + 3) // 2
             for _ in n_eqs:
                 eq = Constraint('=')
-                eq.coeffs = {var:0 for var in var_names}
+                eq.coeffs = {var: 0 for var in var_names}
                 eq.static = False
                 eq_relation.params.append(eq)
             template.params.append(eq_relation)
@@ -298,7 +303,6 @@ class TemplateGen():
             gt.coeffs = {var: 0, '1': 0}
             template.params += [lt, gt]
         return template
-
 
     def get_next_template(self):
         if self.simple_index < len(self.simple_template_smts):
