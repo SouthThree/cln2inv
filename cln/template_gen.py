@@ -238,15 +238,15 @@ class TemplateGen():
 
         if condition['predicate']:
             collection.append("(or " + condition['predicate'] + " " + condition['postcondition']['assert'] + ")")
-        print(collection)
+        #print(collection)
         collection = [i for i in collection if i is not None]
 
         # collection中的每个语句做合取和析取之后加入到collection
         ands = ["(and " + i + " " + j + " )" for i in collection for j in collection]
         ors = ["(or " + i + " " + j + " )" for i in collection for j in collection]
         collection = collection + ands + ors
-        print("In TemplateGen():before return ")
-        print(collection)
+        #print("In TemplateGen():before return ")
+        #print(collection)
 
         self.simple_template_smts = collection
         self.simple_index = 0

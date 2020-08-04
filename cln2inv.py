@@ -28,7 +28,7 @@ def run_code2inv_problem(problem_num):
     check_path = 'benchmarks/code2inv/smt2/'
     trace_path = 'benchmarks/code2inv/csv/'
 
-    if problem_num in [26, 27, 31, 32, 61, 62, 72, 75, 106]:
+    if problem_num in [ 27, 31, 32, 61, 62, 72, 75, 106]:
         print(problem_num, 'theoretically unsolvable')
         return False, '', 0
 

@@ -26,6 +26,7 @@ class InvariantChecker():
     def check(self, inv_str):
         for check in [self.post, self.pre, self.loop]:
             full_check = self.top + inv_str + check
+            #print("in invariants check:"+full_check)
             solver = z3.Solver()
             solver.set("timeout", 2000)
             solver.from_string(full_check)
